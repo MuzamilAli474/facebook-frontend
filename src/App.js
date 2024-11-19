@@ -2,6 +2,7 @@ import React from "react";
 import SignUp from "./component/SignUp";
 import Login from "./component/Login";
 import OtpVerification from "./component/OtpVerify";
+import ForgetPassword from "./component/ForgetPassword";
 // import './component/App.css'
 // import RegistrationForm from './component/RegistrationForm'
 
@@ -13,6 +14,7 @@ function App() {
       <SignUp />
       <OtpVerification/>
       <Login />
+      <ForgetPassword/>
     </div>
   );
 }
