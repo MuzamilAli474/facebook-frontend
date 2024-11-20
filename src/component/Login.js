@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate , Link } from 'react-router-dom';
 import { Box, TextField, Button, Typography, Paper } from '@mui/material';
 import axios from 'axios';
 
 const Login = () => {
-  // State for form inputs and messages
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  // Handle form submission
+  const navigate = useNavigate();
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -20,7 +21,7 @@ const Login = () => {
       setSuccess(response.data.message);
       console.log(response);
 
-      // Optionally, save the token for authentication
+     
       localStorage.setItem('authToken', response.data.token);
     } catch (err) {
       setError( 'Something went wrong' + err);
@@ -28,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <Paper elevation={3} style={{ padding: '20px', maxWidth: '400px', margin: '50px auto' }}>
+    <Paper elevation={9} style={{ padding: '20px', maxWidth: '400px', margin: '50px auto' }}>
       <Typography variant="h4" textAlign="center" gutterBottom>
         Login
       </Typography>
@@ -38,12 +39,13 @@ const Login = () => {
             label="Email"
             name="email"
             type="email"
-            value={email}
+            //  value={email}
             onChange={(e) => setEmail(e.target.value)}
             variant="outlined"
             required
             fullWidth
           />
+          
           <TextField
             label="Password"
             name="password"
@@ -69,6 +71,18 @@ const Login = () => {
           </Button>
         </Box>
       </form>
+      <Typography variant="body2" textAlign="center" style={{ marginTop: '20px' }}>
+        Don't have a account?{' '}
+        <Link to="/SignUp" style={{ color: '#1976d2', textDecoration: 'none' }}>
+          SignUp
+        </Link>
+      </Typography>
+      <Typography variant="body2" textAlign="center" style={{ marginTop: '20px' }}>
+       If Don't Remember password?{' '}
+        <Link to="/forgetPassword" style={{ color: '#1976d2', textDecoration: 'none' }}>
+          Forget Password
+        </Link>
+      </Typography>
     </Paper>
   );
 };

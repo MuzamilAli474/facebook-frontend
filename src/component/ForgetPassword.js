@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function ForgetPassword() {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
-
-  // Handle forget password (Send OTP)
+const navigate = useNavigate();
   const handleForgetPassword = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/forgetPassword', { email });
       setMessage(response.data.message);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Something went wrong');
+      setMessage( 'Something went wrong' + error);
     }
   };
 
-  // Handle reset password (Submit OTP and New Password)
+ 
   const handleResetPassword = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/resetPassword', { email, otp, newPassword });
       setMessage(response.data.message);
+      navigate('/Login',);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Something went wrong');
+      setMessage('Something went wrong' + error);
     }
   };
 

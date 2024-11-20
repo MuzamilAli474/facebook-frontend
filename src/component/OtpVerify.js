@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, Typography, Paper } from '@mui/material';
 import axios from 'axios';
 
 const OtpVerification = () => {
-  // State for OTP and email
+  
   const [otp, setOtp] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  // Handle form submission
+  const navigate = useNavigate();
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setError('');
@@ -18,8 +18,9 @@ const OtpVerification = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/verifyOTP', { email, otp }); // Update with your backend endpoint
       setSuccess(response.data.message);
+      navigate('/Login',);
     } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong');
+      setError('Something went wrong');
       console.log(err)
     }
   };

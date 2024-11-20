@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate ,Link } from 'react-router-dom';
 import { Box, TextField, Button, Typography, Paper } from '@mui/material';
 import axios from 'axios';
+
 
 const SignUp = () => {
   // State for form data
@@ -10,11 +12,11 @@ const SignUp = () => {
     password: '',
   });
 
-  // State for errors and success messages
+ 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  // Handle form input change
+  const navigate = useNavigate();
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,7 +24,6 @@ const SignUp = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -32,6 +33,7 @@ const SignUp = () => {
       const response = await axios.post('http://localhost:5000/api/users/signUp', formData); // Replace with your actual backend URL
       setSuccess(response.data.message);
       setFormData({ name: '', email: '', password: '' });
+      navigate('/OtpVerification',);
     } catch (err) {
       setError( 'Something went wrong');
       console.log(err)
@@ -87,8 +89,15 @@ const SignUp = () => {
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Sign Up
           </Button>
+          
         </Box>
       </form>
+      <Typography variant="body2" textAlign="center" style={{ marginTop: '20px' }}>
+        Already have an account?{' '}
+        <Link to="/Login" style={{ color: '#1976d2', textDecoration: 'none' }}>
+          Login
+        </Link>
+      </Typography>
     </Paper>
   );
 };
