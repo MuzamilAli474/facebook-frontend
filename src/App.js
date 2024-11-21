@@ -4,6 +4,7 @@ import Login from "./component/Login";
 import OtpVerification from "./component/OtpVerify";
 import ForgetPassword from "./component/ForgetPassword";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
+import Navbar from "./component/Navbar";
 // import './component/App.css'
 // import RegistrationForm from './component/RegistrationForm'
 
@@ -16,10 +17,12 @@ function App() {
       {/* <OtpVerification/> */}
       {/* <Login /> */}
       {/* <ForgetPassword/> */}
+     
       <BrowserRouter>
+      <Navbar/>
                  <Routes>
-                     {/* <Route exact path="/" element={<h1>Home Page</h1>} /> */}
-                     <Route exact path="/" element={<SignUp />} />
+                     <Route exact path="/" element={<h1>This Is My Social App</h1>} />
+                     <Route exact path="/SignUp" element={<SignUp />} />
                      <Route exact path="OtpVerification" element={<OtpVerification />} />
                      <Route exact path="ForgetPassword" element={<ForgetPassword />} />
 
