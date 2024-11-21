@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import "./App.css"
 const RegistrationForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ const RegistrationForm = () => {
       const data = await response.json();
       if (response.ok) {
         alert('OTP sent to your email');
-        setSentOtp(data.otp); // Store OTP temporarily
+        setSentOtp(data.otp); 
       } else {
         alert(data.error);
       }
@@ -33,7 +33,7 @@ const RegistrationForm = () => {
   const verifyOTP = () => {
     if (otp === sentOtp) {
       alert('Email verified successfully!');
-      setSentOtp(null); // Clear OTP after successful verification
+      setSentOtp(null);
     } else {
       alert('Incorrect OTP');
     }
